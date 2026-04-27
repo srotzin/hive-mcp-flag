@@ -1,0 +1,171 @@
+# Smithery Registry — hive-mcp-flag
+# https://smithery.ai
+
+startCommand:
+  type: http
+  configSchema:
+    type: object
+    properties: {}
+    required: []
+  url: https://hive-mcp-flag.onrender.com/mcp
+
+name: hive-mcp-flag
+displayName: hive-mcp-flag — Feature flag service for the A2A network
+version: "1.0.0"
+description: >
+  Feature flag service for the A2A network. Create flags with DID-keyed
+  targeting and percentage rollouts, evaluate them at runtime by agent DID,
+  and roll config changes out without redeploying. x402 USDC settlement on
+  Base L2. $0.0005 per flag_eval, $0.001 per flag_create, $0.0005 per
+  flag_update. Inbound only. Real rails — actual SQLite persistence,
+  ethers signature verification, Base RPC reads.
+
+author:
+  name: Steve Rotzin
+  email: steve@thehiveryiq.com
+  url: https://www.thehiveryiq.com
+
+license: MIT
+homepage: https://github.com/srotzin/hive-mcp-flag
+repository:
+  type: git
+  url: https://github.com/srotzin/hive-mcp-flag
+
+transport: streamable-http
+endpoint: https://hive-mcp-flag.onrender.com/mcp
+protocol: "2024-11-05"
+
+categories:
+  - developer-tools
+  - agent-to-agent
+  - configuration
+  - feature-flags
+  - web3
+
+tags:
+  - mcp
+  - hive
+  - feature-flag
+  - rollout
+  - did
+  - x402
+  - 402
+  - ai-agents
+  - a2a
+  - usdc
+  - base-l2
+
+tools:
+  - name: flag_eval
+    description: >
+      Evaluate a flag for a DID and return the resolved value plus which
+      targeting rule matched. Charges $0.0005 USDC on Base.
+    inputs:
+      - name: flag_key
+        type: string
+        required: true
+      - name: evaluating_did
+        type: string
+        required: true
+      - name: tx_hash
+        type: string
+        required: false
+        description: "Base USDC tx hash that paid the asking amount to the W1 wallet"
+  - name: flag_list
+    description: List flags owned by a DID. Read-only, no charge.
+    inputs:
+      - name: owner_did
+        type: string
+        required: true
+  - name: flag_describe
+    description: >
+      Return the full definition of a flag — type, default value, targeting
+      rules, recent evaluations. Read-only, no charge.
+    inputs:
+      - name: flag_key
+        type: string
+        required: true
+  - name: flag_create
+    description: >
+      Create a flag with a default value and targeting rules. Charges $0.001
+      USDC on Base.
+    inputs:
+      - name: flag_key
+        type: string
+        required: true
+      - name: owner_did
+        type: string
+        required: true
+      - name: type
+        type: string
+        required: true
+        description: "boolean | string | number | json"
+      - name: default_value
+        type: any
+        required: true
+      - name: targeting_rules
+        type: array
+        required: false
+      - name: tx_hash
+        type: string
+        required: false
+  - name: flag_update
+    description: >
+      Update a flag's default value or targeting rules. Owner DID only.
+      Charges $0.0005 USDC on Base.
+    inputs:
+      - name: flag_key
+        type: string
+        required: true
+      - name: owner_did
+        type: string
+        required: true
+      - name: default_value
+        type: any
+        required: false
+      - name: targeting_rules
+        type: array
+        required: false
+      - name: tx_hash
+        type: string
+        required: false
+  - name: flag_delete
+    description: >
+      Tombstone a flag. Owner DID only. Charges $0.001 USDC on Base.
+    inputs:
+      - name: flag_key
+        type: string
+        required: true
+      - name: owner_did
+        type: string
+        required: true
+      - name: tx_hash
+        type: string
+        required: false
+
+runtime:
+  type: node
+  version: ">=18"
+  command: node server.js
+  env:
+    - name: PORT
+      default: "3000"
+      required: false
+    - name: ENABLE
+      default: "true"
+      required: false
+    - name: WALLET_ADDRESS
+      default: "0x15184bf50b3d3f52b60434f8942b7d52f2eb436e"
+      required: false
+    - name: BASE_RPC_URL
+      default: "https://mainnet.base.org"
+      required: false
+    - name: VERIFY_ONCHAIN
+      default: "true"
+      required: false
+    - name: MAX_FLAGS_PER_DID
+      default: "500"
+      required: false
+    - name: DB_PATH
+      default: "/tmp/flag.db"
+      required: false
