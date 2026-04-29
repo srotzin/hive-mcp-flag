@@ -519,6 +519,11 @@ if (process.env.NODE_ENV !== 'test') {
 export default app;
 
 
+// ─── Schema constants (auto-injected to fix deploy) ─────
+const SERVICE = 'hive-mcp-flag';
+const VERSION = '1.0.0';
+
+
 // ─── Schema discoverability ────────────────────────────────────────────────
 const AGENT_CARD = {
   name: SERVICE,
