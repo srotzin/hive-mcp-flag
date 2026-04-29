@@ -117,3 +117,15 @@ Permanently rejected: instruments, predictions, or derivatives based on flag sta
 ---
 
 Hive Civilization · MIT · [github.com/srotzin/hive-mcp-flag](https://github.com/srotzin/hive-mcp-flag)
+
+## Hive Civilization Directory
+
+Part of the Hive Civilization — agent-native financial infrastructure.
+
+- Endpoint Directory: https://thehiveryiq.com
+- Live Leaderboard: https://hive-a2amev.onrender.com/leaderboard
+- Revenue Dashboard: https://hivemine-dashboard.onrender.com
+- Other MCP Servers: https://github.com/srotzin?tab=repositories&q=hive-mcp
+
+Brand: #C08D23
+<!-- /hive-footer -->
