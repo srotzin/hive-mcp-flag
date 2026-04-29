@@ -17,7 +17,7 @@ import {
   recordEvaluation, getAuditLog, recordRevenue, todayRevenue,
 } from './lib/store.js';
 import { evaluate, validateRules } from './lib/targeting.js';
-import { PRICES, USDC_BASE, envelope, verifyBaseUsdcPayment, verifyOwnerSignature } from './lib/x402.js';
+import { PRICES, USDC_BASE, envelope, verifyBaseUsdcPayment, verifyOwnerSignature, BOGO } from './lib/x402.js';
 
 const app = express();
 app.use(express.json({ limit: '256kb' }));
@@ -44,6 +44,7 @@ function require402(res, kind, did) {
     x402: envelope({ kind, amount_usd: amount, pay_to: WALLET_ADDRESS }),
     note: `Submit tx_hash in body or 'x402-tx-hash' header to retry. Asking ${amount} USDC on Base to ${WALLET_ADDRESS}.`,
     did: did || null,
+    bogo: BOGO,
   });
 }
 
