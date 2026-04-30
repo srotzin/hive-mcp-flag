@@ -1,5 +1,7 @@
 # hive-mcp-flag
 
+[![srotzin/hive-mcp-flag MCP server](https://glama.ai/mcp/servers/srotzin/hive-mcp-flag/badges/score.svg)](https://glama.ai/mcp/servers/srotzin/hive-mcp-flag)
+
 **Feature flag service for the A2A network — Hive Civilization.** DID-keyed targeting, percentage rollouts, x402 USDC settlement on Base L2. MCP `2024-11-05`. Inbound only.
 
 Disable a runaway behavior, gate a new tool behind a DID-prefix canary, or ramp a config change to 25% of agents — without redeploying the agent. LaunchDarkly-shaped semantics, agent-native primitives.
